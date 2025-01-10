@@ -1,0 +1,45 @@
+.content {
+  margin: 0;
+  /* background-color: aqua; */
+}
+
+.content__cards {
+  max-width: 1280px;
+  padding: 20px 0 36px;
+  margin: 0 80px;
+  display: grid;
+  grid: repeat(2, 445px) / repeat(3, 413px);
+  /* or you can do this:
+  grid-template-columns: repeat(3, 413px);
+  grid-template-rows: repeat(2, 445px); */
+  gap: 40px 20px;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #21212166;
+}
+
+@media screen and (max-width: 880px) {
+  .content__cards {
+    min-width: 288px;
+    padding: 20px 0;
+    margin: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    /* background-color: blueviolet; */
+  }
+}
+
+@media screen and (min-width: 880px) and (max-width: 1320px) {
+  .content__cards {
+    grid: repeat(3, 445px) / repeat(2, 413px);
+  }
+}
+
+@media screen and (min-width: 630px) and (max-width: 880px) {
+  .content__cards {
+    padding: 20px 0;
+    margin: 0 80px;
+  }
+}
