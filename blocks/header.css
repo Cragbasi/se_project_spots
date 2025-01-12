@@ -38,95 +38,6 @@
   padding-right: 8px;
 }
 
-.header__avatar {
-  margin: 0;
-  width: 505px;
-  height: 190px;
-  gap: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  overflow: hidden;
-}
-
-.avatar__image {
-  width: 190px;
-  height: 190px;
-  border-radius: 8px;
-}
-
-.avatar__column {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
-}
-
-.avatar__information {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
-}
-
-.avatar__name {
-  margin: 0;
-  font-family: Poppins, Inter, Arial, sans-serif;
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 32px;
-  margin-bottom: 12px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  line-clamp: 3;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-.avatar__description {
-  margin: 0;
-  font-family: Poppins, Inter, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 16px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  line-clamp: 3;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-.avatar__button {
-  margin: 0;
-  border: none;
-  padding: 0;
-  background-color: #fcf5e5;
-  color: black;
-  opacity: 70%;
-  width: 200px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  text-align: left;
-}
-.avatar__button:hover {
-  opacity: 100%;
-  cursor: pointer;
-}
-
-.avatar__button-icon {
-  width: 15px;
-  height: 15px;
-  margin: 0;
-  padding: 0;
-  padding-right: 8px;
-  opacity: 70%;
-}
-
 @media screen and (max-width: 630px) {
   .header {
     min-width: 288px;
@@ -142,41 +53,6 @@
     height: 52px;
     align-self: center;
     background-color: #212121;
-  }
-
-  .avatar__button {
-    justify-content: center;
-  }
-
-  .header__avatar {
-    width: 288px;
-    height: 274px;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-    padding: 20px;
-    /* background-color: blue; */
-  }
-  .avatar__column {
-    align-items: center;
-    /* background-color: green; */
-  }
-
-  .avatar__information {
-    align-items: center;
-    /* background-color: brown; */
-    padding-bottom: 32px;
-  }
-
-  .avatar__image {
-    width: 80px;
-    height: 80px;
-  }
-
-  .avatar__name {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 20px;
   }
 }
 
