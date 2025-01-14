@@ -12,3 +12,12 @@
   background-color: #fcf5e5;
   /* background-color: green; */
 }
+
+@media screen and (min-width: 1440px) {
+  .page {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

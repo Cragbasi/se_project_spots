@@ -13,10 +13,3 @@
   font-weight: 500;
   src: url("../../vendor/fonts/Poppins-Medium.ttf") format("truetype");
 }
-
-@font-face {
-  font-family: "DM Mono";
-  font-style: normal;
-  font-weight: 500px;
-  src: url("../../vendor/fonts/DMMono-Medium.ttf") format("truetype");
-}

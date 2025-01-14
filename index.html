@@ -15,137 +15,122 @@
   </head>
   <body>
     <div class="page">
-      <div class="menubar">
-        <img src="./images/logo.svg" alt="Spot logo" class="menubar__logo" />
-        SPOTS
-      </div>
-
       <header class="header">
-        <div class="avatar">
-          <img
-            src="./images/avatar.jpg"
-            alt="Avatar's image"
-            class="avatar__image"
-          />
-
-          <div class="avatar__column">
-            <div class="avatar__information">
-              <h1 class="avatar__name">Bessie Coleman</h1>
-              <p class="avatar__description">Civil Aviator</p>
-            </div>
-            <button type="button" class="avatar__button">
-              <img
-                src="./images/pencil.svg"
-                alt="Pencil icon"
-                class="avatar__button avatar__button-icon"
-              />
-              Edit Profile
-            </button>
-          </div>
-        </div>
-        <button type="button" class="header__button">
-          <img
-            src="./images/cross.svg"
-            alt="Cross icon"
-            class="header__button-icon"
-          />
-          New Post
-        </button>
+        <img src="./images/logo.svg" alt="Spot logo" class="header__logo" />
       </header>
 
-      <main class="content">
-        <div class="content__cards">
-          <div class="card">
+      <main>
+        <section class="profile">
+          <div class="avatar">
+            <img
+              src="./images/avatar.jpg"
+              alt="Avatar's image"
+              class="avatar__image"
+            />
+
+            <div class="avatar__column">
+              <div class="avatar__information">
+                <h1 class="avatar__name">Bessie Coleman</h1>
+                <p class="avatar__description">Civil Aviator</p>
+              </div>
+              <button type="button" class="avatar__button">
+                <img src="./images/pencil.svg" alt="Pencil icon" />
+                Edit Profile
+              </button>
+            </div>
+          </div>
+          <button type="button" class="profile__button">
+            <img
+              src="./images/cross.svg"
+              alt="Cross icon"
+              class="profile__button-icon"
+            />
+            New Post
+          </button>
+        </section>
+
+        <section class="cards">
+          <article class="card">
             <img
               src="./images/1-photo-by-moritz-feldmann-from-pexels.jpg"
               alt="Val Thorens image"
               class="card__image"
             />
-            <p class="card__description">
-              Val Thorens
-              <img
-                src="./images/like-icon.svg"
-                alt="Like icon"
-                class="card__like-icon"
-              />
-            </p>
-          </div>
-          <div class="card">
+            <div class="card__footer">
+              <h2 class="card__description">Val Thorens</h2>
+              <button type="button" class="card__love-button">
+                <img src="./images/love-icon.svg" alt="Love icon" />
+              </button>
+            </div>
+          </article>
+          <article class="card">
             <img
               src="./images/2-photo-by-ceiline-from-pexels.jpg"
               alt="Restaurant terrace image"
               class="card__image"
             />
-            <p class="card__description">
-              Restaurant terrace
-              <img
-                src="./images/like-icon.svg"
-                alt="Like icon"
-                class="card__like-icon"
-              />
-            </p>
-          </div>
-          <div class="card">
+            <div class="card__footer">
+              <h2 class="card__description">Restaurant terrace</h2>
+              <button type="button" class="card__love-button">
+                <img src="./images/love-icon.svg" alt="Love icon" />
+              </button>
+            </div>
+          </article>
+          <article class="card">
             <img
               src="./images/3-photo-by-tubanur-dogan-from-pexels.jpg"
               alt="An outdoor cafe image"
               class="card__image"
             />
-            <p class="card__description">
-              An outdoor cafe
-              <img
-                src="./images/like-icon.svg"
-                alt="Like icon"
-                class="card__like-icon"
-              />
-            </p>
-          </div>
-          <div class="card">
+            <div class="card__footer">
+              <h2 class="card__description">An outdoor cafe</h2>
+              <button type="button" class="card__love-button">
+                <img src="./images/love-icon.svg" alt="Love icon" />
+              </button>
+            </div>
+          </article>
+          <article class="card">
             <img
               src="./images/4-photo-by-maurice-laschet-from-pexels.jpg"
               alt="A very long bridge, over the forest image"
               class="card__image"
             />
-            <p class="card__description">
-              A very long bridge, over the forest...
-              <img
-                src="./images/like-icon.svg"
-                alt="Like icon"
-                class="card__like-icon"
-              />
-            </p>
-          </div>
-          <div class="card">
+            <div class="card__footer">
+              <h2 class="card__description">
+                A very long bridge, over the forest
+              </h2>
+              <button type="button" class="card__love-button">
+                <img src="./images/love-icon.svg" alt="Love icon" />
+              </button>
+            </div>
+          </article>
+          <article class="card">
             <img
               src="./images/5-photo-by-van-anh-nguyen-from-pexels.jpg"
               alt="Tunnel with morning light image"
               class="card__image"
             />
-            <p class="card__description">
-              Tunnel with morning light
-              <img
-                src="./images/like-icon.svg"
-                alt="Like icon"
-                class="card__like-icon"
-              />
-            </p>
-          </div>
-          <div class="card">
+            <div class="card__footer">
+              <h2 class="card__description">Tunnel with morning light</h2>
+              <button type="button" class="card__love-button">
+                <img src="./images/love-icon.svg" alt="Love icon" />
+              </button>
+            </div>
+          </article>
+          <article class="card">
             <img
               src="./images/6-photo-by-moritz-feldmann-from-pexels.jpg"
               alt="Mountain house image"
               class="card__image"
             />
-            <p class="card__description">
-              Mountain house
-              <img
-                src="./images/like-icon.svg"
-                alt="Like icon"
-                class="card__like-icon"
-              />
-            </p>
-          </div>
-        </div>
+            <div class="card__footer">
+              <h2 class="card__description">Mountain house</h2>
+              <button type="button" class="card__love-button">
+                <img src="./images/love-icon.svg" alt="Love icon" />
+              </button>
+            </div>
+          </article>
+        </section>
       </main>
 
       <footer class="footer">
