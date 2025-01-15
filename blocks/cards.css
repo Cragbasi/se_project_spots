@@ -3,10 +3,7 @@
   padding: 20px 0 40px;
   margin: 0 80px;
   display: grid;
-  grid: repeat(2, 445px) / repeat(3, 413px);
-  /* or you can do this:
   grid-template-columns: repeat(3, 413px);
-  grid-template-rows: repeat(2, 445px); */
   gap: 36px 20px;
   justify-content: center;
   align-items: center;
@@ -28,7 +25,7 @@
 
 @media screen and (min-width: 880px) and (max-width: 1320px) {
   .cards {
-    grid: repeat(3, 445px) / repeat(2, 413px);
+    grid-template-columns: repeat(2, 413px);
   }
 }
 
