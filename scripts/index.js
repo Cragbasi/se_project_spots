@@ -67,9 +67,14 @@ for (let i = 0; i < initialCards.length; i++) {
 console.log("I'm working");
 
 const avatarInfo = page.querySelector(".avatar__information");
-const avatarInfoSave = [
+let avatarInfoSave = [
   avatarInfo.querySelector(".avatar__name"),
   avatarInfo.querySelector(".avatar__description"),
+];
+
+let avatarInfoValue = [
+  modalEditProfile.querySelector("#name"),
+  modalEditProfile.querySelector("#description"),
 ];
 
 function modalToggle() {
@@ -77,10 +82,7 @@ function modalToggle() {
 
   // TODO: Get the values of each form field from the value property
   // of the corresponding input element.
-  let avatarInfoValue = [
-    modalEditProfile.querySelector("#name"),
-    modalEditProfile.querySelector("#description"),
-  ];
+
   for (let i = 0; i < avatarInfoValue.length; i++) {
     avatarInfoValue[i].value = avatarInfoSave[i].textContent;
   }
@@ -94,6 +96,7 @@ function handleProfileFormSubmit(evt) {
 
   // TODO: Then insert these new values into the textContent property of the
   // corresponding profile elements.
+
   for (let i = 0; i < avatarInfoValue.length; i++) {
     avatarInfoSave[i].textContent = avatarInfoValue[i].value;
   }
