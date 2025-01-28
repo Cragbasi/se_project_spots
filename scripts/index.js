@@ -38,16 +38,16 @@ function getCardElement(cardData) {
     .content.querySelector(".card")
     .cloneNode(true);
   // select the card title and image and store them in variables
-  cardElement.querySelector(".card__image").src = cardData.link;
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
   cardElement.querySelector(".card__description").textContent = cardData.name;
-  cardElement.querySelector(".card__image").alt = cardData.name;
-
   //return the ready HTML element with the filled-in data
   return cardElement;
 }
 for (let i = 0; i < initialCards.length; i++) {
   // Pass the array item to your getCardElement() function to create a card element.
-  card = getCardElement(initialCards[i]);
+  const card = getCardElement(initialCards[i]);
   console.log(card);
 
   // Use the appropriate built-in DOM method to add this HTML element to the page.
@@ -67,28 +67,28 @@ for (let i = 0; i < initialCards.length; i++) {
 console.log("I'm working");
 
 const avatarInfo = page.querySelector(".avatar__information");
-let avatarInfoSave = [
+let profileInfoSave = [
   avatarInfo.querySelector(".avatar__name"),
   avatarInfo.querySelector(".avatar__description"),
 ];
 
-let avatarInfoValue = [
+let profileInfoValue = [
   modalEditProfile.querySelector("#name"),
   modalEditProfile.querySelector("#description"),
 ];
 
-function modalToggle() {
-  modalEditProfile.classList.toggle("modal__opened");
+function toggleModal() {
+  modalEditProfile.classList.toggle("modal_opened");
 
   // TODO: Get the values of each form field from the value property
   // of the corresponding input element.
 
-  for (let i = 0; i < avatarInfoValue.length; i++) {
-    avatarInfoValue[i].value = avatarInfoSave[i].textContent;
+  for (let i = 0; i < profileInfoValue.length; i++) {
+    profileInfoValue[i].value = profileInfoSave[i].textContent;
   }
 }
-editProfileButton.addEventListener("click", modalToggle);
-closeEditProfile.addEventListener("click", modalToggle);
+editProfileButton.addEventListener("click", toggleModal);
+closeEditProfile.addEventListener("click", toggleModal);
 
 function handleProfileFormSubmit(evt) {
   // Prevent default browser behavior, see explanation below.
@@ -97,11 +97,11 @@ function handleProfileFormSubmit(evt) {
   // TODO: Then insert these new values into the textContent property of the
   // corresponding profile elements.
 
-  for (let i = 0; i < avatarInfoValue.length; i++) {
-    avatarInfoSave[i].textContent = avatarInfoValue[i].value;
+  for (let i = 0; i < profileInfoValue.length; i++) {
+    profileInfoSave[i].textContent = profileInfoValue[i].value;
   }
   // TODO: Close the modal.
-  modalToggle();
+  toggleModal();
 }
 
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);

@@ -20,7 +20,7 @@
   }
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
 }
 .modal__container {
@@ -70,12 +70,10 @@
   font-size: 20px;
   font-weight: 500;
   line-height: 20px;
-  text-align: left;
   border-radius: 8px;
   border-color: #21212166;
   opacity: 40%;
-  height: 52px;
-  padding: 16px auto 16px 12px;
+  padding: 16px 0 16px 12px;
   margin-bottom: 32px;
 }
 
@@ -83,10 +81,10 @@
   color: #2121214d;
   opacity: 30%;
 }
-.modal_imput:hover(::placeholder) {
+/* .modal_imput:hover(::placeholder) {
   color: #2121214d;
   opacity: 30%;
-}
+} */
 .modal__input:hover {
   border-color: #212121;
   opacity: 100%;
