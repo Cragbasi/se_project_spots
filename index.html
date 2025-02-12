@@ -43,7 +43,7 @@
               </button>
             </div>
           </div>
-          <button type="button" class="profile__button">
+          <button id="newPostButton" type="button" class="profile__button">
             <img
               src="./images/cross.svg"
               alt="Cross icon"
@@ -56,25 +56,34 @@
         <section class="cards">
           <template id="card">
             <article class="card">
-              <img class="card__image" />
+              <button type="button" class="card__image-button">
+                <img class="card__image" />
+              </button>
+
+              <button type="button" class="card__delete-button"></button>
               <div class="card__footer">
                 <h2 class="card__description"></h2>
                 <button type="button" class="card__love-button">
-                  <img src="./images/love-icon.svg" alt="Love icon" />
+                  <!-- <img id="loveIconButton" src="./images/love-icon.svg" alt="Love icon" /> -->
                 </button>
               </div>
             </article>
           </template>
         </section>
-        <section class="modal">
+
+        <section id="editProfile" class="modal">
           <div class="modal__container">
             <div class="modal__header">
               <h2 class="modal__title">Edit profile</h2>
-              <button type="button" class="modal__button-close">
+              <button
+                id="closeEditProfile"
+                type="button"
+                class="modal__button-close"
+              >
                 <img src="./images/close.svg" />
               </button>
             </div>
-            <form class="modal__form">
+            <form id="formEditProfile" class="modal__form">
               <label for="name" class="modal__input-label"> Name </label>
               <input
                 type="text"
@@ -91,8 +100,69 @@
                 class="modal__input"
                 placeholder="Describe yourself"
               />
-              <button type="submit" class="modal__button-save">Save</button>
+              <button
+                type="submit"
+                id="saveEditProfile"
+                class="modal__button-save"
+              >
+                Save
+              </button>
             </form>
+          </div>
+        </section>
+
+        <section id="newPost" class="modal">
+          <div class="modal__container">
+            <div class="modal__header">
+              <h2 class="modal__title">New post</h2>
+              <button
+                type="button"
+                id="closeNewPostButton"
+                class="modal__button-close"
+              >
+                <img src="./images/close.svg" />
+              </button>
+            </div>
+            <form id="formNewPost" class="modal__form">
+              <label for="picture" class="modal__input-label">
+                Image link
+              </label>
+              <input
+                type="text"
+                id="picture"
+                class="modal__input"
+                placeholder="Paste a link to the picture"
+              />
+              <label for="caption" class="modal__input-label"> Caption </label>
+              <input
+                type="text"
+                id="caption"
+                class="modal__input"
+                placeholder="Type your caption"
+              />
+              <button
+                type="submit"
+                id="saveNewPostButton"
+                class="modal__button-save"
+              >
+                Save
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <section id="clickedPicture" class="modal">
+          <div class="modal__image-container">
+            <img class="modal__image" />
+            <!-- src=" https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg" -->
+            <div class="modal_image-title-container">
+              <h2 class="modal_image-title">Image title</h2>
+            </div>
+            <button
+              type="button"
+              id="closeImageButton"
+              class="modal__close-image-button"
+            ></button>
           </div>
         </section>
       </main>
