@@ -1,4 +1,9 @@
+// Initial data of image cards
 const initialCards = [
+  {
+    name: "Golden Gate bridge",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
+  },
   {
     name: "Val Thorens",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
@@ -25,6 +30,7 @@ const initialCards = [
   },
 ];
 
+// Finding and defining HTML elements as variables
 const page = document.querySelector(".page");
 const editProfileButton = page.querySelector("#editProfileButton");
 const newPostButton = page.querySelector("#newPostButton");
@@ -35,11 +41,12 @@ const closeEditProfileButton = modalEditProfile.querySelector(
 );
 const closeNewPostButton = modalNewPost.querySelector("#closeNewPostButton");
 const formEditProfile = modalEditProfile.querySelector("#formEditProfile");
-const formNewPost = modalNewPost.querySelector("#formNewPost");
+// const formNewPost = modalNewPost.querySelector("#formNewPost"); or
+const formNewPost = document.forms["formNewPost"];
 const enlargeModalImage = page.querySelector("#clickedPicture");
 const modalImage = enlargeModalImage.querySelector(".modal__image");
 
-let cardsElement = page.querySelector(".cards");
+const cardsElement = page.querySelector(".cards");
 
 //Delete card function
 function deleteCard(card) {
@@ -54,26 +61,22 @@ function activateLoveButton(love) {
 // Click image to enlarge function
 function clickImage(card, image) {
   modalImage.src = image.src;
+  modalImage.alt = image.alt;
   console.log(modalImage);
-  enlargeModalImage.querySelector(".modal_image-title").textContent =
+  enlargeModalImage.querySelector(".modal__image-title").textContent =
     card.textContent;
-  enlargeModalImage.classList.toggle("modal_opened");
-}
-
-// Close image function
-function closeImage() {
-  enlargeModalImage.classList.toggle("modal_opened");
+  toggleModal(enlargeModalImage);
 }
 
 // Set image close button
 const closeImageButton = enlargeModalImage.querySelector("#closeImageButton");
 closeImageButton.addEventListener("click", () => {
-  closeImage();
+  toggleModal(enlargeModalImage);
 });
 
 //Make card from template function
 function getCardElement(cardData) {
-  let cardElement = cardsElement
+  const cardElement = cardsElement
     .querySelector("#card")
     .content.querySelector(".card")
     .cloneNode(true);
@@ -110,16 +113,18 @@ function displayCard(card) {
       // Pass the array item to your getCardElement() function to create a card element.
       let cardDisplay = getCardElement(card);
       console.log(cardDisplay);
+      // Use the appropriate built-in DOM method to add this HTML element to the page.
       cardsElement.append(cardDisplay);
     });
 
-    // Use the appropriate built-in DOM method to add this HTML element to the page.
+    // This is for user input single card, separate from initial cards' array
   } else {
     let cardDisplay = getCardElement(card);
     cardsElement.prepend(cardDisplay);
   }
 }
 
+// Call display card funtion to display initial cards' array
 displayCard(initialCards);
 
 // If you want to use for
@@ -142,22 +147,22 @@ console.log("I'm working");
 
 // Defining profile and newpost modals' variables
 const avatarInfo = page.querySelector(".avatar__information");
-let profileInfoSave = [
+const profileInfoSave = [
   avatarInfo.querySelector(".avatar__name"),
   avatarInfo.querySelector(".avatar__description"),
 ];
 
-let profileInfoValue = [
+const profileInfoValue = [
   modalEditProfile.querySelector("#name"),
   modalEditProfile.querySelector("#description"),
 ];
 
-let modalNewPostValue = [
+const modalNewPostValue = [
   modalNewPost.querySelector("#picture"),
   modalNewPost.querySelector("#caption"),
 ];
 
-// Close modal
+// Pop-up or close modal (toggle modal)
 function toggleModal(modal) {
   modal.classList.toggle("modal_opened");
 
@@ -205,15 +210,18 @@ function handleformNewPostSubmit(evt) {
 
   // TODO: Then insert these new values
 
-  initialCards.unshift = {
+  const cardData = {
     name: modalNewPostValue[1].value,
     link: modalNewPostValue[0].value,
   };
 
   // Call the function to display added card
-  displayCard(initialCards.unshift);
+  displayCard(cardData);
   // TODO: Close the modal.
   toggleModal(modalNewPost);
+  // Clear the inputs after a successful adding of a new card to let the user add the 2nd one again without having to remove the old data manually.
+  modalNewPostValue[1].value = "";
+  modalNewPostValue[0].value = "";
 }
 
 // Modal form submit event listeners for edit profile and new post

@@ -44,6 +44,8 @@
 .card__love-button {
   margin: 0;
   background-image: url("../images/love-icon.svg");
+  background-repeat: no-repeat;
+  background-color: transparent;
   border: none;
   width: 23px;
   height: 20px;
@@ -57,6 +59,7 @@
 }
 
 .card__love-button_activated {
+  background-color: transparent;
   opacity: 100%;
   background-image: url("../images/love-icon-red.svg");
 }

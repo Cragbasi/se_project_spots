@@ -63,9 +63,7 @@
               <button type="button" class="card__delete-button"></button>
               <div class="card__footer">
                 <h2 class="card__description"></h2>
-                <button type="button" class="card__love-button">
-                  <!-- <img id="loveIconButton" src="./images/love-icon.svg" alt="Love icon" /> -->
-                </button>
+                <button type="button" class="card__love-button"></button>
               </div>
             </article>
           </template>
@@ -80,7 +78,7 @@
                 type="button"
                 class="modal__button-close"
               >
-                <img src="./images/close.svg" />
+                <img src="./images/close.svg" alt="Close button" />
               </button>
             </div>
             <form id="formEditProfile" class="modal__form">
@@ -120,7 +118,7 @@
                 id="closeNewPostButton"
                 class="modal__button-close"
               >
-                <img src="./images/close.svg" />
+                <img src="./images/close.svg" alt="Close button" />
               </button>
             </div>
             <form id="formNewPost" class="modal__form">
@@ -154,14 +152,13 @@
         <section id="clickedPicture" class="modal">
           <div class="modal__image-container">
             <img class="modal__image" />
-            <!-- src=" https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg" -->
-            <div class="modal_image-title-container">
-              <h2 class="modal_image-title">Image title</h2>
+            <div class="modal__image-title-container">
+              <h2 class="modal__image-title">Image title</h2>
             </div>
             <button
               type="button"
               id="closeImageButton"
-              class="modal__close-image-button"
+              class="modal__button-close modal__button-close_positioned"
             ></button>
           </div>
         </section>
