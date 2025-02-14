@@ -45,6 +45,7 @@ const formEditProfile = modalEditProfile.querySelector("#formEditProfile");
 const formNewPost = document.forms["formNewPost"];
 const enlargeModalImage = page.querySelector("#clickedPicture");
 const modalImage = enlargeModalImage.querySelector(".modal__image");
+const modalImageTitle = enlargeModalImage.querySelector(".modal__image-title");
 
 const cardsElement = page.querySelector(".cards");
 
@@ -63,8 +64,7 @@ function clickImage(card, image) {
   modalImage.src = image.src;
   modalImage.alt = image.alt;
   console.log(modalImage);
-  enlargeModalImage.querySelector(".modal__image-title").textContent =
-    card.textContent;
+  modalImageTitle.textContent = card.textContent;
   toggleModal(enlargeModalImage);
 }
 
@@ -107,11 +107,11 @@ function getCardElement(cardData) {
 }
 
 //Desplay inital cards or added card
-function displayCard(card) {
-  if (Array.isArray(card)) {
-    card.forEach((card) => {
+function displayCard(data) {
+  if (Array.isArray(data)) {
+    data.forEach((card) => {
       // Pass the array item to your getCardElement() function to create a card element.
-      let cardDisplay = getCardElement(card);
+      const cardDisplay = getCardElement(card);
       console.log(cardDisplay);
       // Use the appropriate built-in DOM method to add this HTML element to the page.
       cardsElement.append(cardDisplay);
@@ -119,7 +119,7 @@ function displayCard(card) {
 
     // This is for user input single card, separate from initial cards' array
   } else {
-    let cardDisplay = getCardElement(card);
+    const cardDisplay = getCardElement(data);
     cardsElement.prepend(cardDisplay);
   }
 }
@@ -165,18 +165,17 @@ const modalNewPostValue = [
 // Pop-up or close modal (toggle modal)
 function toggleModal(modal) {
   modal.classList.toggle("modal_opened");
+}
 
+// Event listeners to toggle edit profile and newpost modals on and off
+editProfileButton.addEventListener("click", () => {
+  toggleModal(modalEditProfile);
   // TODO: Get the values of each form field from the value property
   // of the corresponding input element.
 
   for (let i = 0; i < profileInfoValue.length; i++) {
     profileInfoValue[i].value = profileInfoSave[i].textContent;
   }
-}
-
-// Event listeners to toggle edit profile and newpost modals on and off
-editProfileButton.addEventListener("click", () => {
-  toggleModal(modalEditProfile);
 });
 closeEditProfile.addEventListener("click", () => {
   toggleModal(modalEditProfile);
