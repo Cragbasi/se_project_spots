@@ -22,6 +22,19 @@
   }
 }
 
+.modal__input_error {
+  color: #ff0000b2;
+  margin-bottom: 32px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17.6px;
+  letter-spacing: 0%;
+  visibility: hidden;
+}
+.modal__input_error_active {
+  visibility: visible;
+}
+
 .modal_opened {
   visibility: visible;
   opacity: 1;
@@ -118,7 +131,7 @@
   border-color: #21212166;
   opacity: 40%;
   padding: 16px 0 16px 12px;
-  margin-bottom: 32px;
+  margin-bottom: 8px;
 }
 
 .modal_imput::placeholder(:hover) {
@@ -168,6 +181,17 @@
   opacity: 100%;
   cursor: pointer;
 }
+.modal__button-save:disabled {
+  cursor: default;
+  background: #212121;
+  opacity: 50%;
+}
+
+/* .modal__button-save_disabled {
+  cursor: not-allowed;
+  background: #212121;
+  opacity: 50%;
+} */
 
 .modal__button-close_positioned {
   background-image: url("../images/close-image.svg");
@@ -250,5 +274,10 @@
   .modal__image {
     border-radius: 8px;
     max-height: 80vh;
+  }
+
+  .modal__button-close_positioned {
+    top: -41px;
+    right: 16px;
   }
 }

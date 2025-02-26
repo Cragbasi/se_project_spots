@@ -41,7 +41,7 @@ const closeEditProfileButton = modalEditProfile.querySelector(
 );
 const closeNewPostButton = modalNewPost.querySelector("#closeNewPostButton");
 const formEditProfile = modalEditProfile.querySelector("#formEditProfile");
-// const formNewPost = modalNewPost.querySelector("#formNewPost"); or
+// const formNewPost = modalNewPost.querySelector("#formNewPost"); or better:
 const formNewPost = document.forms["formNewPost"];
 const enlargeModalImage = page.querySelector("#clickedPicture");
 const modalImage = enlargeModalImage.querySelector(".modal__image");
@@ -63,7 +63,6 @@ function activateLoveButton(love) {
 function clickImage(card, image) {
   modalImage.src = image.src;
   modalImage.alt = image.alt;
-  console.log(modalImage);
   modalImageTitle.textContent = card.textContent;
   toggleModal(enlargeModalImage);
 }
@@ -97,8 +96,12 @@ function getCardElement(cardData) {
     deleteCard(cardElement);
   });
   // Set image click button
-  const imageButton = cardElement.querySelector(".card__image-button");
-  imageButton.addEventListener("click", () => {
+  // const imageButton = cardElement.querySelector(".card__image-button");
+  // imageButton.addEventListener("click", () => {
+  //   clickImage(cardElement, cardImage);
+  // });
+  const imageElement = cardElement.querySelector(".card__image");
+  imageElement.addEventListener("click", () => {
     clickImage(cardElement, cardImage);
   });
 
@@ -112,7 +115,6 @@ function displayCard(data) {
     data.forEach((card) => {
       // Pass the array item to your getCardElement() function to create a card element.
       const cardDisplay = getCardElement(card);
-      console.log(cardDisplay);
       // Use the appropriate built-in DOM method to add this HTML element to the page.
       cardsElement.append(cardDisplay);
     });
@@ -165,7 +167,41 @@ const modalNewPostValue = [
 // Pop-up or close modal (toggle modal)
 function toggleModal(modal) {
   modal.classList.toggle("modal_opened");
+  closeModalUsingBackground(modal);
 }
+// Select all modal elements
+// const modalElements = page.querySelectorAll(".modal");
+// function modalClose() {
+//   console.log("here");
+//   modalElements.forEach((modal) =>
+//     modal.addEventListener("click", (evt) => {
+//       evt.target.classList.remove("modal_opened");
+//     })
+//   );
+// }
+
+// Listen to modal background when clicked and close modal upon click
+// Also listen to esc key when pressed and close modal
+const closeModalUsingBackground = (modal) => {
+  console.log("here");
+  modal.addEventListener("click", (evt) => {
+    evt.target.classList.remove("modal_opened");
+  });
+  document.addEventListener(
+    "keydown",
+    (evt) => {
+      if (evt.key === "Escape" || evt.key === "Esc") {
+        // Your code to execute when the Escape key is pressed
+        console.log("Escape key pressed");
+        modal.classList.remove("modal_opened");
+      }
+    },
+    //The { once: true } option ensures that the event listener
+    // will be removed automatically after it has been triggered once.
+    // This will prevent memory leak.
+    { once: true }
+  );
+};
 
 // Event listeners to toggle edit profile and newpost modals on and off
 editProfileButton.addEventListener("click", () => {

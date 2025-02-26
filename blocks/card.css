@@ -11,13 +11,17 @@
   border-radius: 8px;
 }
 
-.card__image-button {
+.card__image:hover {
+  cursor: pointer;
+}
+
+/* .card__image-button {
   width: 100%;
   height: 100%;
   border: none;
   cursor: pointer;
   background-color: transparent;
-}
+} */
 
 .card__footer {
   margin: 0;

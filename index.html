@@ -56,10 +56,10 @@
         <section class="cards">
           <template id="card">
             <article class="card">
-              <button type="button" class="card__image-button">
+              <img class="card__image" />
+              <!-- <button type="button" class="card__image-button">
                 <img class="card__image" />
-              </button>
-
+              </button> -->
               <button type="button" class="card__delete-button"></button>
               <div class="card__footer">
                 <h2 class="card__description"></h2>
@@ -88,7 +88,11 @@
                 id="name"
                 class="modal__input"
                 placeholder="Type your name"
+                required
+                minlength="2"
+                maxlength="40"
               />
+              <span class="modal__input_error name-error">Error</span>
               <label for="description" class="modal__input-label">
                 Description
               </label>
@@ -97,11 +101,15 @@
                 id="description"
                 class="modal__input"
                 placeholder="Describe yourself"
+                required
+                minlength="2"
+                maxlength="200"
               />
+              <span class="modal__input_error description-error"></span>
               <button
                 type="submit"
                 id="saveEditProfile"
-                class="modal__button-save"
+                class="modal__button-save modal__button-save_disabled"
               >
                 Save
               </button>
@@ -126,22 +134,29 @@
                 Image link
               </label>
               <input
-                type="text"
                 id="picture"
                 class="modal__input"
                 placeholder="Paste a link to the picture"
+                required
+                type="url"
               />
+              <span class="modal__input_error picture-error"></span>
               <label for="caption" class="modal__input-label"> Caption </label>
               <input
                 type="text"
                 id="caption"
                 class="modal__input"
                 placeholder="Type your caption"
+                required
+                minlength="2"
+                maxlength="30"
               />
+              <span class="modal__input_error caption-error"></span>
               <button
                 type="submit"
                 id="saveNewPostButton"
-                class="modal__button-save"
+                class="modal__button-save modal__button-save_disabled"
+                disabled
               >
                 Save
               </button>
@@ -170,6 +185,7 @@
     </div>
 
     <script defer type="text/javascript" src="./scripts/index.js"></script>
+    <script defer type="text/javascript" src="./scripts/validation.js"></script>
   </body>
 </html>
 
