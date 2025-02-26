@@ -3,8 +3,8 @@ const settings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button-save",
   inactiveButtonClass: "modal__button-save_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__input_error_active",
+  inputErrorClass: "modal__input_error",
+  errorClass: "modal__input-error_active",
 };
 
 // function to selecting all forms
@@ -49,6 +49,7 @@ function showInputError(form, inputEl, config) {
   const inputError = form.querySelector(`.${inputEl.id}-error`);
   inputError.textContent = inputEl.validationMessage;
   inputError.classList.add(config.errorClass);
+  inputEl.classList.add(config.inputErrorClass);
   console.log(inputError);
 }
 
@@ -56,6 +57,7 @@ function showInputError(form, inputEl, config) {
 function hideInputError(form, inputEl, config) {
   const inputError = form.querySelector(`.${inputEl.id}-error`);
   inputError.classList.remove(config.errorClass);
+  inputEl.classList.remove(config.inputErrorClass);
 }
 
 // function if any input is not valid disable submit button

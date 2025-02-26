@@ -22,19 +22,6 @@
   }
 }
 
-.modal__input_error {
-  color: #ff0000b2;
-  margin-bottom: 32px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 17.6px;
-  letter-spacing: 0%;
-  visibility: hidden;
-}
-.modal__input_error_active {
-  visibility: visible;
-}
-
 .modal_opened {
   visibility: visible;
   opacity: 1;
@@ -148,15 +135,32 @@
   cursor: pointer;
 }
 
-/* ::placeholder {
-  color: #2121214d;
-  opacity: 100%;
-} */
-
 .modal__input:not(:placeholder-shown) {
   color: #212121;
   opacity: 100%;
 }
+
+.modal__input_error {
+  border-color: #ff000099;
+}
+
+.modal__input-error {
+  color: #ff0000b2;
+  margin-bottom: 32px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17.6px;
+  letter-spacing: 0%;
+  visibility: hidden;
+}
+.modal__input-error_active {
+  visibility: visible;
+}
+
+/* ::placeholder {
+  color: #2121214d;
+  opacity: 100%;
+} */
 
 .modal__button-save {
   background-color: #212121;
