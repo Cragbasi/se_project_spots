@@ -188,6 +188,7 @@
 .modal__button-save:disabled {
   cursor: default;
   background: #212121;
+  /* background: red; */
   opacity: 50%;
 }
 
@@ -227,6 +228,10 @@
     font-size: 16px;
     line-height: 16px;
     max-width: 276px;
+    margin-bottom: 8px;
+  }
+
+  .modal__input-error {
     margin-bottom: 24px;
   }
 

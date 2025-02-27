@@ -11,7 +11,6 @@ const settings = {
 function enableValidation(config) {
   // Selecting all forms
   const formList = document.querySelectorAll(config.formSelector);
-  console.log(formList);
   formList.forEach((formEl) => {
     // Call event listener function and set on each form
     setEventListeners(formEl, config);
@@ -27,7 +26,6 @@ function setEventListeners(form, config) {
   inputElements.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(form, inputEl, config);
-      // console.log(inputEl);
       toggleSubmitButtons(inputElements, form, config);
     });
   });
@@ -50,7 +48,6 @@ function showInputError(form, inputEl, config) {
   inputError.textContent = inputEl.validationMessage;
   inputError.classList.add(config.errorClass);
   inputEl.classList.add(config.inputErrorClass);
-  console.log(inputError);
 }
 
 // function to hide error
@@ -75,5 +72,19 @@ function toggleSubmitButtons(inputList, form, config) {
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
+  });
+};
+
+const disableSubmitButton = (buttonEl) => {
+  buttonEl.disabled = true;
+};
+
+// function to reset error displayed in edit profile form after closed
+const resetErrorDisplayedInEditProfileModal = (form, config) => {
+  const inputElements = Array.from(form.querySelectorAll(config.inputSelector));
+
+  // for each input element call function to hide error
+  inputElements.forEach((inputEl) => {
+    hideInputError(form, inputEl, config);
   });
 };

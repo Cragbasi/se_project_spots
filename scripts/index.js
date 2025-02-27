@@ -35,7 +35,9 @@ const page = document.querySelector(".page");
 const editProfileButton = page.querySelector("#editProfileButton");
 const newPostButton = page.querySelector("#newPostButton");
 const modalEditProfile = page.querySelector("#editProfile");
+const submitProfileButton = modalEditProfile.querySelector("#saveEditProfile");
 const modalNewPost = page.querySelector("#newPost");
+const submitNewPostButton = modalNewPost.querySelector("#saveNewPostButton");
 const closeEditProfileButton = modalEditProfile.querySelector(
   "#closeEditProfileButton"
 );
@@ -99,7 +101,7 @@ function getCardElement(cardData) {
   // const imageButton = cardElement.querySelector(".card__image-button");
   // imageButton.addEventListener("click", () => {
   //   clickImage(cardElement, cardImage);
-  // });
+  // }); Instead of creeating a button just listen on the image element click
   const imageElement = cardElement.querySelector(".card__image");
   imageElement.addEventListener("click", () => {
     clickImage(cardElement, cardImage);
@@ -129,7 +131,7 @@ function displayCard(data) {
 // Call display card funtion to display initial cards' array
 displayCard(initialCards);
 
-// If you want to use for
+// If you want to use for loop
 // for (let i = 0; i < initialCards.length; i++) {
 //   // Pass the array item to your getCardElement() function to create a card element.
 //   const card = getCardElement(initialCards[i]);
@@ -144,8 +146,6 @@ displayCard(initialCards);
 // }
 // editProfileButton.addEventListener("click", modalOpen);
 // closeEditProfile.addEventListener("click", modalClose);
-
-console.log("I'm working");
 
 // Defining profile and newpost modals' variables
 const avatarInfo = page.querySelector(".avatar__information");
@@ -169,7 +169,7 @@ function toggleModal(modal) {
   modal.classList.toggle("modal_opened");
   closeModalUsingBackground(modal);
 }
-// Select all modal elements
+// Select all modal elements (not needed?)
 // const modalElements = page.querySelectorAll(".modal");
 // function modalClose() {
 //   console.log("here");
@@ -205,6 +205,7 @@ const closeModalUsingBackground = (modal) => {
 
 // Event listeners to toggle edit profile and newpost modals on and off
 editProfileButton.addEventListener("click", () => {
+  resetErrorDisplayedInEditProfileModal(modalEditProfile, settings);
   toggleModal(modalEditProfile);
   // TODO: Get the values of each form field from the value property
   // of the corresponding input element.
@@ -237,6 +238,9 @@ function handleProfileFormSubmit(evt) {
   }
   // TODO: Close the modal.
   toggleModal(modalEditProfile);
+
+  disableSubmitButton(submitProfileButton);
+  formEditProfile.reset();
 }
 
 function handleformNewPostSubmit(evt) {
@@ -255,8 +259,11 @@ function handleformNewPostSubmit(evt) {
   // TODO: Close the modal.
   toggleModal(modalNewPost);
   // Clear the inputs after a successful adding of a new card to let the user add the 2nd one again without having to remove the old data manually.
-  modalNewPostValue[1].value = "";
-  modalNewPostValue[0].value = "";
+  evt.target.reset();
+  // Or
+  // modalNewPostValue[1].value = "";
+  // modalNewPostValue[0].value = "";
+  disableSubmitButton(submitNewPostButton);
 }
 
 // Modal form submit event listeners for edit profile and new post
