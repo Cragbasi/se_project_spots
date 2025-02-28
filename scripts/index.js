@@ -66,13 +66,13 @@ function clickImage(card, image) {
   modalImage.src = image.src;
   modalImage.alt = image.alt;
   modalImageTitle.textContent = card.textContent;
-  toggleModal(enlargeModalImage);
+  openModal(enlargeModalImage);
 }
 
 // Set image close button
 const closeImageButton = enlargeModalImage.querySelector("#closeImageButton");
 closeImageButton.addEventListener("click", () => {
-  toggleModal(enlargeModalImage);
+  closeModal(enlargeModalImage);
 });
 
 //Make card from template function
@@ -102,8 +102,7 @@ function getCardElement(cardData) {
   // imageButton.addEventListener("click", () => {
   //   clickImage(cardElement, cardImage);
   // }); Instead of creeating a button just listen on the image element click
-  const imageElement = cardElement.querySelector(".card__image");
-  imageElement.addEventListener("click", () => {
+  cardImage.addEventListener("click", () => {
     clickImage(cardElement, cardImage);
   });
 
@@ -137,13 +136,6 @@ displayCard(initialCards);
 //   const card = getCardElement(initialCards[i]);
 //   console.log(card);
 
-// Without using toggle:
-// function modalOpen() {
-//   modalEditProfile.classList.add("modal_opened");
-// }
-// function modalClose() {
-//   modalEditProfile.classList.remove("modal_opened");
-// }
 // editProfileButton.addEventListener("click", modalOpen);
 // closeEditProfile.addEventListener("click", modalClose);
 
@@ -164,11 +156,35 @@ const modalNewPostValue = [
   modalNewPost.querySelector("#caption"),
 ];
 
-// Pop-up or close modal (toggle modal)
-function toggleModal(modal) {
-  modal.classList.toggle("modal_opened");
+// Open or close modal without using toggle:
+function openModal(modal) {
+  modal.classList.add("modal_opened");
   closeModalUsingBackground(modal);
+  document.addEventListener("keydown", closeModalUsingEsc);
 }
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalUsingEsc);
+}
+
+const closeModalUsingEsc = (evt) => {
+  if (evt.key === "Escape" || evt.key === "Esc") {
+    // Your code to execute when the Escape key is pressed
+    const modals = Array.from(page.querySelectorAll(".modal"));
+
+    // for each form element check for the opened form and close it
+    modals.forEach((modal) => {
+      if (modal.classList.contains("modal_opened")) {
+        closeModal(modal);
+      }
+    });
+  }
+};
+
+// Pop-up or close modal (toggle modal)
+// function toggleModal(modal) {
+//   modal.classList.toggle("modal_opened");
+// }
 // Select all modal elements (not needed?)
 // const modalElements = page.querySelectorAll(".modal");
 // function modalClose() {
@@ -183,30 +199,17 @@ function toggleModal(modal) {
 // Listen to modal background when clicked and close modal upon click
 // Also listen to esc key when pressed and close modal
 const closeModalUsingBackground = (modal) => {
-  console.log("here");
-  modal.addEventListener("click", (evt) => {
-    evt.target.classList.remove("modal_opened");
+  modal.addEventListener("mousedown", (evt) => {
+    // evt.target.classList.remove("modal_opened");
+    closeModal(evt.target);
   });
-  document.addEventListener(
-    "keydown",
-    (evt) => {
-      if (evt.key === "Escape" || evt.key === "Esc") {
-        // Your code to execute when the Escape key is pressed
-        console.log("Escape key pressed");
-        modal.classList.remove("modal_opened");
-      }
-    },
-    //The { once: true } option ensures that the event listener
-    // will be removed automatically after it has been triggered once.
-    // This will prevent memory leak.
-    { once: true }
-  );
 };
 
 // Event listeners to toggle edit profile and newpost modals on and off
 editProfileButton.addEventListener("click", () => {
   resetErrorDisplayedInEditProfileModal(modalEditProfile, settings);
-  toggleModal(modalEditProfile);
+  disableSubmitButton(submitProfileButton);
+  openModal(modalEditProfile);
   // TODO: Get the values of each form field from the value property
   // of the corresponding input element.
 
@@ -215,14 +218,14 @@ editProfileButton.addEventListener("click", () => {
   }
 });
 closeEditProfile.addEventListener("click", () => {
-  toggleModal(modalEditProfile);
+  closeModal(modalEditProfile);
 });
 newPostButton.addEventListener("click", () => {
-  toggleModal(modalNewPost);
+  openModal(modalNewPost);
 });
 
 closeNewPostButton.addEventListener("click", function () {
-  toggleModal(modalNewPost);
+  closeModal(modalNewPost);
 });
 
 // Handle submitted profile function
@@ -237,7 +240,7 @@ function handleProfileFormSubmit(evt) {
     profileInfoSave[i].textContent = profileInfoValue[i].value;
   }
   // TODO: Close the modal.
-  toggleModal(modalEditProfile);
+  closeModal(modalEditProfile);
 
   disableSubmitButton(submitProfileButton);
   formEditProfile.reset();
@@ -257,7 +260,7 @@ function handleformNewPostSubmit(evt) {
   // Call the function to display added card
   displayCard(cardData);
   // TODO: Close the modal.
-  toggleModal(modalNewPost);
+  closeModal(modalNewPost);
   // Clear the inputs after a successful adding of a new card to let the user add the 2nd one again without having to remove the old data manually.
   evt.target.reset();
   // Or

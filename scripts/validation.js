@@ -62,7 +62,7 @@ function toggleSubmitButtons(inputList, form, config) {
   const submitButton = form.querySelector(config.submitButtonSelector);
   if (hasInvalidInput(inputList)) {
     // submitButton.classList.add(config.inactiveButtonClass);
-    submitButton.disabled = true;
+    disableSubmitButton(submitButton);
   } else {
     // submitButton.classList.remove(config.inactiveButtonClass);
     submitButton.disabled = false;
