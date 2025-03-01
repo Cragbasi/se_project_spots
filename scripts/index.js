@@ -48,8 +48,9 @@ const formNewPost = document.forms["formNewPost"];
 const enlargeModalImage = page.querySelector("#clickedPicture");
 const modalImage = enlargeModalImage.querySelector(".modal__image");
 const modalImageTitle = enlargeModalImage.querySelector(".modal__image-title");
-
 const cardsElement = page.querySelector(".cards");
+// Array of all modals aka pop ups
+const popUps = Array.from(page.querySelectorAll(".modal"));
 
 //Delete card function
 function deleteCard(card) {
@@ -159,27 +160,47 @@ const modalNewPostValue = [
 // Open or close modal without using toggle:
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  closeModalUsingBackground(modal);
   document.addEventListener("keydown", closeModalUsingEsc);
+
+  // debugger;
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closeModalUsingEsc);
 }
 
 const closeModalUsingEsc = (evt) => {
+  // debugger;
   if (evt.key === "Escape" || evt.key === "Esc") {
     // Your code to execute when the Escape key is pressed
     const modals = Array.from(page.querySelectorAll(".modal"));
 
     // for each form element check for the opened form and close it
-    modals.forEach((modal) => {
-      if (modal.classList.contains("modal_opened")) {
-        closeModal(modal);
+    popUps.forEach((popUp) => {
+      // debugger;
+      if (popUp.classList.contains("modal_opened")) {
+        closeModal(popUp);
       }
     });
   }
+  document.removeEventListener("keydown", closeModalUsingEsc);
 };
+
+// Listen to modal background when clicked and close modal upon click
+// Also listen to esc key when pressed and close modal
+popUps.forEach((popUp) => {
+  popUp.addEventListener("mousedown", (evt) => {
+    if (popUp.classList.contains("modal_opened")) {
+      closeModal(evt.target);
+    }
+  });
+});
+// closeModalUsingBackground(modal);
+// const closeModalUsingBackground = (modal) => {
+//   modal.addEventListener("mousedown", (evt) => {
+//     // evt.target.classList.remove("modal_opened");
+//     closeModal(evt.target);
+//   });
+// };
 
 // Pop-up or close modal (toggle modal)
 // function toggleModal(modal) {
@@ -195,15 +216,6 @@ const closeModalUsingEsc = (evt) => {
 //     })
 //   );
 // }
-
-// Listen to modal background when clicked and close modal upon click
-// Also listen to esc key when pressed and close modal
-const closeModalUsingBackground = (modal) => {
-  modal.addEventListener("mousedown", (evt) => {
-    // evt.target.classList.remove("modal_opened");
-    closeModal(evt.target);
-  });
-};
 
 // Event listeners to toggle edit profile and newpost modals on and off
 editProfileButton.addEventListener("click", () => {
