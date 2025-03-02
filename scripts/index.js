@@ -166,14 +166,15 @@ function openModal(modal) {
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalUsingEsc);
 }
 
+// After listening to esc key when pressed, close modal
 const closeModalUsingEsc = (evt) => {
   // debugger;
+  console.log("at Esc");
   if (evt.key === "Escape" || evt.key === "Esc") {
     // Your code to execute when the Escape key is pressed
-    const modals = Array.from(page.querySelectorAll(".modal"));
-
     // for each form element check for the opened form and close it
     popUps.forEach((popUp) => {
       // debugger;
@@ -182,14 +183,18 @@ const closeModalUsingEsc = (evt) => {
       }
     });
   }
-  document.removeEventListener("keydown", closeModalUsingEsc);
 };
 
 // Listen to modal background when clicked and close modal upon click
-// Also listen to esc key when pressed and close modal
+
 popUps.forEach((popUp) => {
+  console.log("at mousedown");
   popUp.addEventListener("mousedown", (evt) => {
-    if (popUp.classList.contains("modal_opened")) {
+    console.log("1", evt, "2", evt.target, "3", evt.currentTarget);
+    if (
+      popUp.classList.contains("modal_opened") &&
+      evt.target === evt.currentTarget
+    ) {
       closeModal(evt.target);
     }
   });
