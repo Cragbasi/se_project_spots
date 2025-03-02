@@ -193,6 +193,7 @@ popUps.forEach((popUp) => {
     console.log("1", evt, "2", evt.target, "3", evt.currentTarget);
     if (
       popUp.classList.contains("modal_opened") &&
+      //So that the Esc event listener is not removed when image is clicked
       evt.target === evt.currentTarget
     ) {
       closeModal(evt.target);
