@@ -1,14 +1,14 @@
-const settings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button-save",
-  inactiveButtonClass: "modal__button-save_disabled",
-  inputErrorClass: "modal__input_error",
-  errorClass: "modal__input-error_active",
-};
+// export const settings = {
+//   formSelector: ".modal__form",
+//   inputSelector: ".modal__input",
+//   submitButtonSelector: ".modal__button-save",
+//   inactiveButtonClass: "modal__button-save_disabled",
+//   inputErrorClass: "modal__input_error",
+//   errorClass: "modal__input-error_active",
+// };
 
-// function to selecting all forms
-function enableValidation(config) {
+// function to selecting all forms and enable validation
+export function enableValidation(config) {
   // Selecting all forms
   const formList = document.querySelectorAll(config.formSelector);
   formList.forEach((formEl) => {
@@ -16,7 +16,7 @@ function enableValidation(config) {
     setEventListeners(formEl, config);
   });
 }
-enableValidation(settings);
+// enableValidation(settings);
 
 // Set event listener
 function setEventListeners(form, config) {
@@ -36,7 +36,7 @@ function setEventListeners(form, config) {
 function checkInputValidity(form, inputEl, config) {
   if (!inputEl.validity.valid) {
     showInputError(form, inputEl, config);
-    console.log(inputEl.validity.typeMismatch);
+    // console.log(inputEl.validity.typeMismatch);
   } else {
     hideInputError(form, inputEl, config);
   }
@@ -75,12 +75,12 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const disableSubmitButton = (buttonEl) => {
+export const disableSubmitButton = (buttonEl) => {
   buttonEl.disabled = true;
 };
 
 // function to reset error displayed in edit profile form after closed
-const resetErrorDisplayedInEditProfileModal = (form, config) => {
+export const resetErrorDisplayedInEditProfileModal = (form, config) => {
   const inputElements = Array.from(form.querySelectorAll(config.inputSelector));
 
   // for each input element call function to hide error

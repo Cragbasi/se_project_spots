@@ -12,6 +12,70 @@
   height: 190px;
   border-radius: 8px;
 }
+.avatar__image-container {
+  position: relative;
+
+  width: 190px;
+  height: 190px;
+  cursor: pointer;
+}
+.avatar__button {
+  margin: 0;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  /* background-color: red; */
+
+  color: #212121;
+  opacity: 70%;
+  width: 200px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 8px;
+  width: 120px;
+}
+
+.avatar__overlay {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+}
+
+.avatar__button-overlay {
+  position: absolute;
+  top: 162px;
+  left: 39px;
+  color: #ffffff;
+  width: 120px;
+}
+.avatar__edit-text {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+}
+.avatar__edit-icon {
+  margin: 0;
+  padding: 0;
+}
+.avatar__edit-icon-container {
+  /* background-color: red; */
+  color: #ffffff;
+}
+.avatar__image-container:hover .avatar__overlay {
+  opacity: 1;
+}
 
 .avatar__column {
   margin: 0;
@@ -61,23 +125,6 @@
   -webkit-box-orient: vertical;
 }
 
-.avatar__button {
-  margin: 0;
-  border: none;
-  padding: 0;
-  background-color: transparent;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 16px;
-  color: #212121;
-  opacity: 70%;
-  width: 200px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  text-align: left;
-  gap: 8px;
-}
 .avatar__button:hover {
   opacity: 100%;
   cursor: pointer;
@@ -114,5 +161,37 @@
   .avatar__name {
     font-size: 20px;
     line-height: 20px;
+  }
+
+  /* .avatar__image-container:hover .avatar__overlay {
+    opacity: 1;
+  } */
+
+  .avatar__image-container {
+    width: 80px;
+    height: 80px;
+  }
+  .avatar__edit-icon {
+    visibility: hidden;
+    width: 23px;
+    height: 23px;
+  }
+  .avatar__edit-icon-container {
+    /* background-color: red; */
+    position: absolute;
+    background-image: url("../images/only-pencil.svg");
+    width: 23px;
+    height: 23px;
+    top: 0px;
+    left: 0px;
+  }
+  .avatar__edit-text {
+    visibility: hidden;
+  }
+  .avatar__button-overlay {
+    width: 23px;
+    height: 23px;
+    top: 52px;
+    left: 52px;
   }
 }
