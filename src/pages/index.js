@@ -12,7 +12,7 @@ const settings = {
   errorClass: "modal__input-error_active",
 };
 import "./index.css";
-import { Api } from "../scripts/Api.js";
+import { Api } from "../../utils/Api.js";
 // Initial data of image cards
 const initialCards = [
   {
@@ -98,15 +98,43 @@ const api = new Api({
 });
 
 api
-  .renderUserInfo()
-  .then((result) => {
-    // process the result
-    // console.log(result);
-    setInitialProfile(result);
+  .getUserData()
+  .then(([profile, cards]) => {
+    // Render user profile
+    setInitialProfile(profile);
+    // Display initial cards
+    displayCard(cards);
   })
-  .catch((err) => {
-    console.error(err); // log the error to the console
+  .catch(([err1, err2]) => {
+    console.error(err1, err2); // log the error to the console
   });
+
+// Use Promise.all instead. Cards should be rendered after the user
+// information is received from the server. Сreate a function in Api.js and
+// return the Promise.all() method. Pass the array of function calls for
+// getting user information and the list of cards to Promise.all() as a parameter.
+// api
+//   .renderUserInfo()
+//   .then((result) => {
+//     // process the result
+//     // console.log(result);
+//     setInitialProfile(result);
+//   })
+//   .catch((err) => {
+//     console.error(err); // log the error to the console
+//   });
+
+//   // Loading cards from the server
+// api
+// .getInitialCards()
+// .then((result) => {
+//   // process the result
+//   // console.log(result);
+//   displayCard(result);
+// })
+// .catch((err) => {
+//   console.error(err); // log the error to the console
+// });
 
 function setInitialProfile(initialProfile) {
   profileInfoSave[0].textContent = initialProfile.name;
@@ -166,16 +194,20 @@ function handleEditProfileAvatarFormSubmit(evt) {
   // by changing the button text to "Saving..."
   editProfileAvatarSubmitButton.textContent = "Saving...";
 
-  // TODO: Then insert these new values into the src property of the
-  // profile image.
-  modalAvatarImage.src = modalEditProfileAvatarImageInput.value;
-
   // Send the following PATCH request to change the profile picture
   api
     .changeProfilePicture(modalEditProfileAvatarImageInput.value)
     .then((result) => {
       // process the result
-      console.log(result);
+      // console.log(result);
+
+      // TODO: Then insert these new values into the src property of the
+      // profile image.
+      modalAvatarImage.src = modalEditProfileAvatarImageInput.value;
+      disableSubmitButton(editProfileAvatarSubmitButton);
+      formEditProfileAvatar.reset();
+      // TODO: Close the modal.
+      closeModal(modalEditProfileAvatar);
     })
     .catch((err) => {
       console.error(err); // log the error to the console
@@ -183,11 +215,6 @@ function handleEditProfileAvatarFormSubmit(evt) {
     .finally(() => {
       // Change button text back to original
       editProfileAvatarSubmitButton.textContent = "Save";
-
-      disableSubmitButton(editProfileAvatarSubmitButton);
-      formEditProfileAvatar.reset();
-      // TODO: Close the modal.
-      closeModal(modalEditProfileAvatar);
     });
 }
 // Handle submitted profile function
@@ -197,12 +224,6 @@ function handleProfileFormSubmit(evt) {
 
   // Change button text to "Saving..."
   submitProfileButton.textContent = "Saving...";
-
-  // TODO: Then insert these new values into the textContent property of the
-  // corresponding profile elements.
-  for (let i = 0; i < profileInfoValue.length; i++) {
-    profileInfoSave[i].textContent = profileInfoValue[i].value;
-  }
 
   // Editing the profile text content
   // Save to server, call API and editUserInfo: /uers/me
@@ -214,6 +235,15 @@ function handleProfileFormSubmit(evt) {
     .then((result) => {
       // process the result
       // console.log(result);
+      // TODO: Then insert these new values into the textContent property of the
+      // corresponding profile elements.
+      for (let i = 0; i < profileInfoValue.length; i++) {
+        profileInfoSave[i].textContent = profileInfoValue[i].value;
+      }
+      disableSubmitButton(submitProfileButton);
+      formEditProfile.reset();
+      // TODO: Close the modal.
+      closeModal(modalEditProfile);
     })
     .catch((err) => {
       console.error(err); // log the error to the console
@@ -222,25 +252,8 @@ function handleProfileFormSubmit(evt) {
     .finally(() => {
       // Change button text back to original
       submitProfileButton.textContent = "Save";
-
-      disableSubmitButton(submitProfileButton);
-      formEditProfile.reset();
-      // TODO: Close the modal.
-      closeModal(modalEditProfile);
     });
 }
-
-// Loading cards from the server
-api
-  .getInitialCards()
-  .then((result) => {
-    // process the result
-    // console.log(result);
-    displayCard(result);
-  })
-  .catch((err) => {
-    console.error(err); // log the error to the console
-  });
 
 function handleformNewPostSubmit(evt) {
   // Prevent default browser behavior, see explanation below.
@@ -263,13 +276,6 @@ function handleformNewPostSubmit(evt) {
       // console.log(result);
       // Call the function to display added card
       displayCard(result);
-    })
-    .catch((err) => {
-      console.error(err); // log the error to the console
-    })
-    .finally(() => {
-      // Change button text back to original
-      submitNewPostButton.textContent = "Deliting";
 
       disableSubmitButton(submitNewPostButton);
       // Clear the inputs after a successful adding of a new card
@@ -277,6 +283,13 @@ function handleformNewPostSubmit(evt) {
       formNewPost.reset();
       // TODO: Close the modal.
       closeModal(modalNewPost);
+    })
+    .catch((err) => {
+      console.error(err); // log the error to the console
+    })
+    .finally(() => {
+      // Change button text back to original
+      submitNewPostButton.textContent = "Deliting";
     });
 }
 // The submission handler makes use of the selectedCard and selectedCardId
@@ -325,6 +338,10 @@ function displayCard(data) {
     cardsElement.prepend(cardDisplay);
   }
 }
+// Activate love button
+function activateLoveButton(loveButton) {
+  loveButton.classList.toggle("card__love-button_activated");
+}
 
 // Call display card funtion to display initial cards' array
 // displayCard(initialCards);
@@ -346,10 +363,10 @@ function getCardElement(cardData) {
 
   // Check if current user has already liked this card
   if (cardData.isLiked) {
-    loveButton.classList.add("card__love-button_activated");
+    activateLoveButton(loveButton);
   }
   loveButton.addEventListener("click", () => {
-    activateLoveButton(loveButton, cardData._id);
+    editLoveButton(loveButton, cardData._id);
   });
   // Set delete button
   const deleteButton = cardElement.querySelector(".card__delete-button");
@@ -377,13 +394,13 @@ function getCardElement(cardData) {
 }
 
 //Activate love button funtion
-function activateLoveButton(loveButton, cardId) {
-  loveButton.classList.toggle("card__love-button_activated");
-  if (loveButton.classList.contains("card__love-button_activated")) {
+function editLoveButton(loveButton, cardId) {
+  if (!loveButton.classList.contains("card__love-button_activated")) {
     api
       .addLike(cardId, "PUT") // pass the ID the the api function
       .then((result) => {
         console.log(result);
+        activateLoveButton(loveButton);
       })
       .catch(console.error);
   } else {
@@ -391,6 +408,7 @@ function activateLoveButton(loveButton, cardId) {
       .addLike(cardId, "DELETE") // pass the ID the the api function
       .then((result) => {
         console.log(result);
+        activateLoveButton(loveButton);
       })
       .catch(console.error);
   }
@@ -410,6 +428,13 @@ function clickImage(card, image) {
 const closeImageButton = enlargeModalImage.querySelector("#closeImageButton");
 closeImageButton.addEventListener("click", () => {
   closeModal(enlargeModalImage);
+});
+// Set deleteImageQuery close button
+const closeDeleteImageQueryButton = modalDeleteCard.querySelector(
+  "#closeDeleteImageQueryButton"
+);
+closeDeleteImageQueryButton.addEventListener("click", () => {
+  closeModal(modalDeleteCard);
 });
 
 // //Activate love button funtion

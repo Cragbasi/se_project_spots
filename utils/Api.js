@@ -5,15 +5,23 @@ export class Api {
     this._options = options;
   }
 
+  getUserData() {
+    return Promise.all([this.renderUserInfo(), this.getInitialCards()]);
+  }
+
+  _checkResponse(response) {
+    if (response.ok) {
+      return response.json();
+    }
+    // if the server returns an error, reject the promise
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
   renderUserInfo() {
     return fetch(`${this._options.baseUrl}/users/me`, {
       headers: this._options.headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
 
@@ -32,11 +40,7 @@ export class Api {
         about,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // If response wasn't ok, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
 
@@ -44,11 +48,7 @@ export class Api {
     return fetch(`${this._options.baseUrl}/cards`, {
       headers: this._options.headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   postCard(name, link) {
@@ -61,11 +61,7 @@ export class Api {
         link,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   removeCard(cardId) {
@@ -77,11 +73,7 @@ export class Api {
         cardId,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   addLike(cardId, method) {
@@ -93,11 +85,7 @@ export class Api {
         cardId,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   changeProfilePicture(pictureUrl) {
@@ -109,11 +97,7 @@ export class Api {
         avatar: pictureUrl,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
 }
