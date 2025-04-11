@@ -289,7 +289,7 @@ function handleformNewPostSubmit(evt) {
     })
     .finally(() => {
       // Change button text back to original
-      submitNewPostButton.textContent = "Deliting";
+      submitNewPostButton.textContent = "Save";
     });
 }
 // The submission handler makes use of the selectedCard and selectedCardId
@@ -309,8 +309,6 @@ function handleDeleteSubmit() {
     .finally(() => {
       // Change button text back to original
       confirmCardDeleteButton.textContent = "Delete";
-      // TODO: Close the modal.
-      closeModal(modalNewPost);
     });
 }
 //Delete card function
